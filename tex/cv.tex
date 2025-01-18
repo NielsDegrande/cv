@@ -1,0 +1,146 @@
+\documentclass{article}
+
+\usepackage{fontawesome}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+
+\pagestyle{empty}
+\raggedright
+
+\newcommand{\contact}[2]{
+    \begin{center}
+    {\LARGE \uppercase {#1}} \\
+    \vspace{8pt}
+    #2
+    \end{center}
+    \vspace*{-8pt}
+}
+
+\newcommand{\header}[1]{
+    {
+        \hspace*{-4pt}
+        \vspace*{8pt}
+        \uppercase{#1}
+    }
+    \vspace*{-4pt} 
+    \lineunder
+    \vspace*{8pt}
+}
+
+\newcommand{\lineunder}{
+    \vspace*{-8pt} \\ 
+    \hspace*{-4pt} 
+    \hrulefill \\
+}
+
+\newcommand{\experience}[5]{
+    \vspace*{2pt}
+    \textbf{#1} -- #2 \hfill #3 \\ 
+    #4 \\
+    #5
+    \vspace*{2pt}
+}
+
+\newcommand{\bigdot}{
+    $\vcenter{\hbox{\tiny$\bullet$}}$\hspace*{2pt}
+}
+
+\newcommand{\spacedbullet}{
+    $\vcenter{\hbox{\tiny$\bullet$}}$\hspace*{-2pt}
+}
+
+\newenvironment{bulletlist}{
+    \begin{list}
+        {\spacedbullet}{\setlength\leftmargin{10pt} 
+        \topsep 0pt \itemsep -2pt}}{\vspace*{4pt}
+    \end{list}
+}
+
+\begin{document}
+\small
+
+\vspace*{-32pt}
+
+\contact{Niels Degrande}
+{
+    \faPhone\ \href{tel:+46722156403}{+46 72-215 6403}
+    \bigdot \faEnvelope\ \href{mailto:niels@degran.de}{niels@degran.de}
+    \bigdot \faGlobe\ \href{https://niels.degran.de}{niels.degran.de}
+    \bigdot \faGithub\ \href{https://github.com/NielsDegrande}{NielsDegrande}
+    \bigdot \faLinkedin\ \href{https://linkedin.com/in/nielsdegrande}{nielsdegrande}
+}
+
+\vspace{16pt}
+
+\header{Work Experience}
+\experience{Partner, AI Engineer}{Boston Consulting Group X}{Jul 2024 -- Present}{Stockholm, Sweden}
+{
+    \begin{bulletlist}
+        \item Built generative AI + ML solutions to reformulate products and automate regulatory docs.
+        \item Used AI-augmented writing (retrieval-augmented generation, constrained agency) to boost marketing workflows.
+    \end{bulletlist}
+}
+
+\experience{Principal AI Engineer}{Boston Consulting Group X}{Apr 2022 -- Jun 2024}{Stockholm, Sweden}
+{
+    \begin{bulletlist}
+        \item Built an LLM-based web app (GCP, FastAPI, React) to automate annual report analysis and drafting.
+        \item Developed generative AI prototypes (OpenAI, Prompt Flow, LangChain) for field support, hyper-personalized emails, and supply chain simulations.
+        \item Led hands-on Generative AI workshops for execs and dev teams.
+        \item Predicted logistic footprints using machine learning and optimized shipping routes with constraint programming.
+        \item Initiated a big data platform for an automotive supplier.
+        \item Conducted technology stack due diligence and code review for software company considered for acquisition.
+        \item Scaled model executions on ACI with orchestration by Airflow, tracking with AzureML, governed by an API.
+        \item Established a company-wide data platform harnessing technologies such as Databricks and Azure Data Factory.
+    \end{bulletlist}
+}
+
+\experience{Lead AI Engineer}{Boston Consulting Group X}{Oct 2020 -- Mar 2022}{Stockholm, Sweden}
+{
+    \begin{bulletlist}
+        \item Created demand forecasting models with MLflow + AzureML and integrated them into production.
+        \item Built React + TypeScript web apps to interface with optimization and simulation engines.
+        \item Developed and scaled supply chain optimization models using OR-Tools and Gurobi.
+        \item Built and deployed an ML-based pricing algorithm with AKS, AzureML, Elasticsearch and LightGBM.
+        \item Ran MLOps training (cloud engineering, CI/CD, feature stores, infra-as-code) for project and client teams, both Azure and GCP.
+    \end{bulletlist}
+}
+
+\experience{Senior AI Engineer}{Boston Consulting Group X}{Oct 2018 -- Sep 2020}{Stockholm, Sweden}
+{
+    \begin{bulletlist}
+        \item Scaled (Bayesian) ML and OR solutions globally with Alibaba Cloud, GCP and Terraform to make investment decisions.
+        \item Developed multi-echelon optimization model for postal services to enhance delivery efficiency.
+        \item Deployed large-scale ML/optimization pipelines using AKS, C\#, Jenkins and Helm to quantify assortments.
+        \item Designed AWS infra (Docker, EC2, RDS) for energy dispatch and trading optimization.
+    \end{bulletlist}
+}
+
+\experience{AI Engineer}{Boston Consulting Group X}{Oct 2016 -- Sep 2018}{Brussels, Belgium}
+{
+    \begin{bulletlist}
+        \item Built a cloud-based Big Data platform with Airflow, Ansible, Hive and Spark (migrated HDInsight to Databricks).
+        \item Replaced core IT systems in banking and insurance to enable modern operations.
+    \end{bulletlist}
+}
+
+\vspace*{4pt}
+
+\header{Education}
+\experience{Bachelor and Master of Science: Information Systems Engineering}{KU Leuven}{2011 -- 2016}{Leuven, Belgium}
+{
+    \begin{bulletlist}
+        \item Specialization: Computer Architecture, Internet Infrastructure and Big Data.
+        \item Graduated Summa cum laude with congratulations of the Board of Examiners.
+        \item Exchange Programs: University of Pennsylvania (2013) and Peking University (2015).
+    \end{bulletlist}
+}
+
+\vspace*{4pt}
+\header{Skills \& Projects}
+\begin{bulletlist}
+    \item Refer to my \href{https://linkedin.com/in/nielsdegrande/}{LinkedIn profile} for a detailed list of technical skills, certifications, publications, languages and awards.
+    \item Visit my \href{https://github.com/NielsDegrande/}{GitHub} and \href{https://niels.degran.de/blog}{personal blog} for an overview of projects and writings.
+\end{bulletlist}
+
+\end{document}

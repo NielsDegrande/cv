@@ -1,0 +1,14 @@
+name: Produce PDF
+on:
+  push:
+    branches: ["main"]
+jobs:
+  produce-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Produce PDF
+        run: make produce_pdf
+      - name: Upload PDF
+        run: curl --ssl-reqd -k -T pdf/niels-degrande-cv.pdf --user "${{ secrets.FTP_USERNAME }}":"${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}/niels-degrande-cv.pdf"
