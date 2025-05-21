@@ -1,7 +1,12 @@
 name: Produce PDF
+
 on:
   push:
     branches: ["main"]
+
+permissions:
+  contents: read
+
 jobs:
   produce-pdf:
     runs-on: ubuntu-latest
