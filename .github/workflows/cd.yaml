@@ -1,29 +1,54 @@
-name: Produce PDF
+name: Deploy CV to GitHub Pages
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - "tex/cv.tex"
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  produce-pdf:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout CV repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Produce PDF
+
+      - name: Build PDF
         run: make produce_pdf
-      
-      - name: Generate date
-        id: date
-        run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
-      
-      - name: Create release
-        uses: softprops/action-gh-release@v2
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: cv-${{ steps.date.outputs.date }}
-          name: CV ${{ steps.date.outputs.date }}
-          files: pdf/niels-degrande-cv.pdf
+          name: cv-pdf
+          path: pdf/niels-degrande-cv.pdf
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: cv-pdf
+          path: public
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
