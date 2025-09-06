@@ -5,7 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "tex/cv.tex"
-      - "index.html"
+      - "404.html"
   workflow_dispatch:
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
           name: cv-files
           path: |
             pdf/niels-degrande-cv.pdf
-            index.html
+            404.html
 
   deploy:
     needs: build
