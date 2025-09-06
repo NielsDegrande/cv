@@ -6,14 +6,35 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   produce-pdf:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout CV repository
         uses: actions/checkout@v4
+      
       - name: Produce PDF
         run: make produce_pdf
-      - name: Upload PDF
-        run: curl --ssl-reqd -k -T pdf/niels-degrande-cv.pdf --user "${{ secrets.FTP_USERNAME }}":"${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}/niels-degrande-cv.pdf"
+      
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: NielsDegrande/niels.degran.de
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: target-repo
+      
+      - name: Copy PDF to target repository
+        run: |
+          mkdir -p target-repo/assets
+          cp pdf/niels-degrande-cv.pdf target-repo/assets/
+      
+      - name: Commit and push to target repository
+        run: |
+          cd target-repo
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/niels-degrande-cv.pdf
+          git diff --staged --quiet || git commit -m "Update CV"
+          git push
