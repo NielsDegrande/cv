@@ -5,8 +5,7 @@ on:
     branches: ["main"]
 
 permissions:
-  contents: read
-  actions: write
+  contents: write
 
 jobs:
   produce-pdf:
@@ -18,23 +17,13 @@ jobs:
       - name: Produce PDF
         run: make produce_pdf
       
-      - name: Checkout target repository
-        uses: actions/checkout@v4
+      - name: Generate date
+        id: date
+        run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+      
+      - name: Create release
+        uses: softprops/action-gh-release@v2
         with:
-          repository: NielsDegrande/niels.degran.de
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: target-repo
-      
-      - name: Copy PDF to target repository
-        run: |
-          mkdir -p target-repo/assets
-          cp pdf/niels-degrande-cv.pdf target-repo/assets/
-      
-      - name: Commit and push to target repository
-        run: |
-          cd target-repo
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add assets/niels-degrande-cv.pdf
-          git diff --staged --quiet || git commit -m "Update CV"
-          git push
+          tag_name: cv-${{ steps.date.outputs.date }}
+          name: CV ${{ steps.date.outputs.date }}
+          files: pdf/niels-degrande-cv.pdf
